@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <%! 
+   <%! // ! 붙이지 않으면 오류
 	     // %!: 선언부
 	     // % : 스크립트릿
 	     public int i = 10;
