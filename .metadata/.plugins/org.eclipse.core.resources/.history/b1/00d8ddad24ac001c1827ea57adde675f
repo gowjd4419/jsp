@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%-- 현재 파일인 req_user_form.jsp에 폼 태그를 만들기
+     목적지는 함께 req_user.jsp파일이고 post방식으로 데이터를 전달
+     먼저 이름, 아이디, 비밀번호를 입력해 보낼 수 있는 input태그를 만들기
+     각 태그의 name 속성은 uname,uid,upw 이다.
+     데이터를 받아주는 req_user.jsp에서 한글이 깨지지 않도록 받아서 화면에 출력 --%>
+ <form action = http://localhost:8181/JSPBasic/jspobject/request/req_user.jsp method="post"> <!-- #으로 두면 자신이 보낸 데이터를 그대로 다시 받음 -->
+      이름 : <input type = "text" name="uname"><br>
+      아이디 : <input type = "id" name="uid"><br>
+      비밀번호 : <input type = "password" name="upw"><br>
+      <input type="submit" value="확인">
+</body>
+</html>

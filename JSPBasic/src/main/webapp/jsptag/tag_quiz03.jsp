@@ -16,7 +16,7 @@
 	   if (!lotto.contains(rn)){
 		   lotto.add(rn);
 	   }
-	   if(lotto.size() == 6){
+	   if(lotto.size() == 6){ 
 		   break;
 	   }
    }
