@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+     // 로그인창에 진입했을때, login_id 라는 명칭으로 발급된 쿠키가 없을 경우
+     // cookie_login.jsp로 리다이렉트 시켜서 로그인 안 한 사람의 접근을 원전차단하기.
+     // 전체 쿠키목록 얻어오기
+     Cookie[] cookies = request.getCookies(); // cookie_check.jsp 의 로직을 참고
+
+     // 쿠키 목록을 반복문으로 돌려서, "login_id" 라는 명칭의 쿠키가 없다면
+     // cookie_login.jsp로 리다이렉트 시키고, 있을때만 아무 행동을 하지 않는
+     // 구문을 작성하기
+     
+     // 리다이렉트 여부를 판단해줄 boolean 자료 생성
+     boolean goLogin = true; // 로그인창으로 보낼지여부, true로 시작
+     
+     // for(int i = 0; i < cookies.length; i++){ // 일반 for문
+	 for(Cookie cookie : cookies){// 향상된 for문
+		 String cookieName = cookie.getName();
+	     if(cookieName.equals("login_id")){
+	    	 goLogin = false; //로그인 절차 확인시 false로
+	     }
+	 }
+     
+     if(goLogin){// boolean이기때문에 로그인 절차 확인된 후에는 실행안됨
+        response.sendRedirect("http://localhost:8181/JSPBasic/jspobject/cookie/cookie_login.jsp");	 
+     }
+  
+  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>로그인하셨습니다. 환영합니다.</h1>
+<%-- 이제 위쪽 로직으로 인해 로그인 여부는 쉽게 파악하고 있지만
+반면, 로그아웃은 여전히 사용자가 직접 쿠키를 삭제해야 하는 불편함이 있다.
+따라서 쿠키가 로그아웃 버튼을 누르면 자동으로 파기되도록 아래 링크를 고쳐보기
+logout_ok.jsp 파일을 생성하고 링크를 여기로 교체 --%>
+<a href="http://localhost:8181/JSPBasic/jspobject/cookie/logout_ok.jsp">로그아웃</a>
+</body>
+</html>

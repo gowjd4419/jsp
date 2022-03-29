@@ -13,12 +13,14 @@ String Photo = request.getParameter("photo");
 %>
 
 
-<%= Photo %> 그림을 골랐습니다.<br>
+선택한 그림 : <%= Photo %><br>
 <%
   if(Photo.equals("1번")){
 	  out.println("1번 그림을 선택하셨네요!");
+	  out.println("<img src=01.png>");
   }else{
 	  out.println("2번 그림을 선택하셨네요!");
+	  out.println("<img src=02.png>");
   }
 %>
 

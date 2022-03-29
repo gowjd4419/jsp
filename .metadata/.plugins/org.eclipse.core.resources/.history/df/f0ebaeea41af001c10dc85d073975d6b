@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+     // 로그인창에 진입했을때, login_id 라는 명칭으로 발급된 쿠키가 없을 경우
+     // cookie_login.jsp로 리다이렉트 시켜서 로그인 안 한 사람의 접근을 원전차단하기.
+     // 전체 쿠키목록 얻어오기
+     Cookie[] cookies = request.getCookies(); // cookie_check.jsp 의 로직을 참고
+
+     // 쿠키 목록을 반복문으로 돌려서, "login_id" 라는 명칭의 쿠키가 없다면
+     // cookie_login.jsp로 리다이렉트 시키고, 있을때만 아무 행동을 하지 않는
+     // 구문을 작성하기
+     // for(int i = 0; i < cookies.length; i++){ // 일반 for문
+	 for(Cookie cookie : cookies){// 향상된 for문
+		 System.out.println(cookie.getName());
+	 }
+	 
+	 if(!str.equals("login_id")){
+		 response.sendRedirect("http://localhost:8181/JSPBasic/jspobject/cookie/cookie_login.jsp");
+		
+	 }
+  
+  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>로그인하셨습니다. 환영합니다.</h1>
+<a href="http://localhost:8181/JSPBasic/jspobject/cookie/cookie_login.jsp">로그아웃</a>
+</body>
+</html>
