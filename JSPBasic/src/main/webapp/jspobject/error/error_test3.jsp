@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page errorPage="error_page2.jsp" %>
 <%
-  int a = 3 * 0 / 1;
+  int a = 3 / 0;
 %>
 <!DOCTYPE html>
 <html>
