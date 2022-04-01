@@ -29,7 +29,7 @@ public class JDBCSelectQ1 {
 		// 4.rs받아와서 출력
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC",//접속할 url
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC",
 					                                     "root",
 					                                     "5613");
 			Statement stmt = con.createStatement();
@@ -38,12 +38,13 @@ public class JDBCSelectQ1 {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			if(rs.next()) {
-				
 				System.out.println(rs.getString(1));
 				System.out.println(rs.getString(2));
 				System.out.println(rs.getString(3));
 				System.out.println(rs.getString(4));
 				System.out.println("---------------");
+			}else {
+				System.out.println(sql + "는 없는 아이디입니다.");
 			}
 		    
 			
