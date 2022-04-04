@@ -41,5 +41,4 @@ public class PreparedDelete {
 			scan.close();
 		}
 	}
-
 }

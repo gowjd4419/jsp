@@ -15,7 +15,7 @@ public class JDBCUpdate {
 		
 		// MySQL을 이용해 수정된 내역이 반영되었는지 확인
 		
-Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 		
 		System.out.print("정보를 바꾸고 싶은 아이디를 입력해주세요.");
 		String id = scan.nextLine();
@@ -35,7 +35,7 @@ Scanner scan = new Scanner(System.in);
 			Statement stmt = con.createStatement();
 			String sql = "UPDATE userinfo SET user_pw = '" + npw + "', user_name = '" + nname + "',"
 					+ " email = '" + nemail + "' WHERE user_id = '" + id + "'";
-			
+			// WHERE조건이 붙기 이전에 ,콤마같은것을 붙이면 입력이 안됨 주의할것
 			System.out.println("실행 예정 구문 : " + sql);
 			
 			stmt.executeUpdate(sql);
