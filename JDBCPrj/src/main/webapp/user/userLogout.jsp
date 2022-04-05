@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	session.invalidate();
+	response.sendRedirect("userLoginForm.jsp");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +11,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String Age = request.getParameter("age");
-int kg = Integer.parseInt(Age);
 
-if(Age >= 20){
-	out.println("성인입니다.<br>");
-}else if(Age < 20){
-	out.println("미성년자입니다.<br>");
-}
-%>
 </body>
 </html>

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+	 String jId = request.getParameter("jId");
+	 String jPw = request.getParameter("jPw");
+	 String jName = request.getParameter("jName");
+	 String jEmail = request.getParameter("jEmail");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +13,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-성인입니다. 주류 구매가 가능합니다.
+
 </body>
 </html>

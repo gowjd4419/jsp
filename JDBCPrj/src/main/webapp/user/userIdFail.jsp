@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-     <form action="res_take.jsp" method="post">
-            당신의 나이는?? <input type="text" name="age" size"5px">
-            <input type="submit" value="확인">
-     </form>
+<h1>아이디가 없습니다.</h1><br>
+<a href="userLoginForm.jsp">다시 로그인</a>
 </body>
 </html>
