@@ -55,7 +55,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <!-- UPDATE userinfo SET user_pw=?, user_name?, email=? WHERE user_id = ? -->
    <h1> <%= sId %>님의 정보를 수정합니다.</h1>
    <form action="userUpdateCheck.jsp" method="post">
        <input type="hidden" name="fId" value="<%= sId %>"><br>

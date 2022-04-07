@@ -24,6 +24,10 @@
 		ResultSet rs = null;
 		// ResultSet의 데이터를 자바 클래스로 교체할 수 있도록 UserVO를 생성
 		UserVO user = new UserVO();
+		
+		// redirect시 이동할 URL을 저장할 수 있는 변수 생성
+		String reUrl = null;
+		
 		try {
 			
 			Class.forName(dbType);
@@ -36,21 +40,21 @@
 			rs = pstmt.executeQuery(); // formId에 해당하는 계정정보(아이디, 패스워드,이메일,이름)
 			 if(rs.next()){// 메모리회수를 위해 바로 조회
 				// 생성된 UserVO에 Setter를 이용해 변수명에 맞는 자료 입력
+				System.out.println(user);
+				System.out.println("--------VO내부 데이터 저장 전--------");
 				user.setUserId(rs.getString(1));
 				user.setUserPw(rs.getString(2));
 				user.setUserName(rs.getString(3));
 				user.setEmail(rs.getString(4));
+				
 				System.out.println("UserVO 내부 자료 조회");
-				System.out.println(user.getUserId());
-				System.out.println(user.getUserPw());
-				System.out.println(user.getUserName());
-				System.out.println(user.getEmail());
+				System.out.println(user);
 				System.out.println("---------------");
 			 }else{
-		    		response.sendRedirect("userPwFail.jsp");
+		    		reUrl = "userIdFail.jsp"; // 실패시엔 reUrl을 실행함
 		    	}
 			
-			rs.close(); //
+			rs.close(); 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -63,15 +67,16 @@
     	// UserVO의 getter를 이용해 비밀번호를 얻어옴.
     	dbPw = user.getUserPw();
     	 // id가 존재한다면 pw일치여부를 확인
-    	if(formPw.equals(dbPw)){// form에 적은 비밀번호가 DB비밀번호와 일치하는지 말그대로 순서임
+    	if(reUrl == null && formPw.equals(dbPw)){// form에 적은 비밀번호가 DB비밀번호와 일치하는지 말그대로 순서임
     		session.setAttribute("s_id", formId);
-    		response.sendRedirect("loginWelcome.jsp");
+    		reUrl = "loginWelcome.jsp"; // 성공시 이동할 URL 저장
     	
-     }else{
-    	 // rs.next()가 false라는것은 DB에 해당 아이디가 존재하지 않는것이므로 아이디 없음 페이지
-    	 response.sendRedirect("userIdFail.jsp");
-     }
-     
+	     }else if(reUrl == null && !formPw.equals(dbPw)){
+	    	 // rs.next()가 false라는것은 DB에 해당 아이디가 존재하지 않는것이므로 아이디 없음 페이지
+	    	 reUrl = "userPwFail.jsp";
+	     }
+    	 response.sendRedirect(reUrl);
+	     
       %>
 <!DOCTYPE html>
 <html>
