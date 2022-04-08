@@ -83,5 +83,51 @@ public class UserDAO {
 		  }
 		}
 		return userList;
-	}
-}
+	}// getAllUserList() 끝나는 지점.
+	
+	// 쿼리문 내에 ?가 있다면
+	// ?개수만큼 사용자가 입력해야 한다.
+	// 그래서 메서드에 요청 파라미터로
+	// ?개수만큼 선언해준다
+	public UserVO getUserInfo(String userId) {
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		
+		// 유저정보를 저장할 수 있는 변수를 생성한다.
+		UserVO user = new UserVO();
+
+		try {
+			
+			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			String sql = "SELECT * FROM userinfo WHERE user_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            
+			rs = pstmt.executeQuery();
+			// rs내부 데이터를 user변수에 옮겨넣기(setter 사용)
+			System.out.println("데이터 입력 전 : " + user);
+			if(rs.next()) {
+			user.setUserId(rs.getString(1));
+			user.setUserPw(rs.getString(2));
+			user.setUserName(rs.getString(3));
+			user.setEmail(rs.getString(4));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				rs.close();
+				pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+        return user; // UserVO를 썼다면 반드시 리턴구문을 써줘야 에러가 안남
+	}// getUserInfo() 끝나는 지점
+	
+	
+	
+	
+}// UserDAO 끝나는 지점.
