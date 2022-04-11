@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -7,35 +8,15 @@
     
 <%      // 한글깨짐 방지는 항상 가장 위쪽에 해야함
         request.setCharacterEncoding("utf-8");
-		String formId = request.getParameter("fId");
-		String formPw = request.getParameter("fPw");
-		String formName = request.getParameter("fName");
-		String formEmail = request.getParameter("fEmail");
+		String fId = request.getParameter("fId");
+		String fPw = request.getParameter("fPw");
+		String fName = request.getParameter("fName");
+		String fEmail = request.getParameter("fEmail");
 		
+		UserDAO dao = new UserDAO();
+		dao.userUpdateCheck(fId, fPw, fName, fEmail);
+		response.sendRedirect("userLoginForm.jsp");
 		
-		String dbType = "com.mysql.cj.jdbc.Driver";
-			String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
-			String connectId = "root";
-			String connectPw = "5613";
-			
-			ResultSet rs = null;
-			try {
-				
-				Class.forName(dbType);
-				
-				Connection con = DriverManager.getConnection(connectUrl,connectId,connectPw);
-				String sql = "UPDATE userinfo SET user_pw=?, user_name=?, email=? WHERE user_id=?";
-		    PreparedStatement pstmt = con.prepareStatement(sql);
-		    pstmt.setString(4, formId);
-		    pstmt.setString(1, formPw);
-		    pstmt.setString(3, formEmail);
-		    pstmt.setString(2, formName);
-		    pstmt.executeUpdate();
-		    
-				rs = pstmt.executeQuery(); 
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 %>
 <!DOCTYPE html>
 <html>

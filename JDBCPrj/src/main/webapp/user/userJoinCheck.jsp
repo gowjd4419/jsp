@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -15,9 +16,23 @@
 	 // 회원가입을 처리하는 로직
 	 // 쿼리문은 INSERT INTO userinfo VALUES
 	 //                   (아이디, 비번, 이름,이메일);
+		UserDAO dao = new UserDAO();
+		dao.userJoinCheck(formId, formPw, formName, formEmail);
+		response.sendRedirect("userLoginForm.jsp");
+ 
+ %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
+</body>
+</html>
 
-	 String dbType = "com.mysql.cj.jdbc.Driver";
+<%-- 	 String dbType = "com.mysql.cj.jdbc.Driver";
 		String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
 		String connectId = "root";
 		String connectPw = "5613";
@@ -39,17 +54,4 @@
 			rs = pstmt.executeQuery(); // formId에 해당하는 계정정보(아이디, 패스워드,이메일,이름)
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
-		response.sendRedirect("userLoginForm.jsp");
- 
- %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+		}--%>

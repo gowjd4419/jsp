@@ -127,7 +127,91 @@ public class UserDAO {
         return user; // UserVO를 썼다면 반드시 리턴구문을 써줘야 에러가 안남
 	}// getUserInfo() 끝나는 지점
 	
+	// 유저 탈퇴기능을 DAO로 옮겨서 만들기
+	// 유저 탈퇴시 입력받는 자료가 user_id 이고
+	// DELETE 구문은 결과자료가 없다. 따라서 리턴자료형을 맞게 적으면 된다.
+	public void userDelete(String user_Id) {
+		// Connection, PreparedStatement를 생성하고 try~catch 쪽에서 처리
+		Connection con = null;
+		PreparedStatement pstmt = null;
+	try {
+			
+			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			String sql = "DELETE FROM userinfo WHERE user_id = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, user_Id);
+            
+            pstmt.executeUpdate();
+           
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				
+			    }catch(Exception e){
+			    	e.printStackTrace();
+			    }
+	        }
 	
+	   }// userDelete 끝나는 지점.
 	
+	public void userJoinCheck(String Id,String Pw,String Name,String Email) {
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		
+		
+try {
+			
+			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			String sql = "INSERT INTO userinfo VALUES (?, ?, ?, ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, Id);
+            pstmt.setString(2, Pw);
+            pstmt.setString(3, Name);
+            pstmt.setString(4, Email);
+            
+            pstmt.executeUpdate();
+            
+	}catch(Exception e) {
+		e.printStackTrace();
+	  }finally {
+		  try {
+		  con.close();
+		  pstmt.close();
+		  }catch(Exception e) {
+			  e.printStackTrace();
+		  }
+	  }
+	}// userJoinCheck 끝나는 지점
+	
+	public void userUpdateCheck(String Id,String Pw,String Name,String Email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			String sql = "UPDATE userinfo SET user_pw=?, user_name=?, email=? WHERE user_id=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(4, Id);
+            pstmt.setString(1, Pw);
+            pstmt.setString(2, Name);
+            pstmt.setString(3, Email);
+            
+            pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}// userUpdateCheck끝나는 지점.
 	
 }// UserDAO 끝나는 지점.

@@ -1,3 +1,5 @@
+<%@page import="com.ict.domain.UserVO"%>
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -23,8 +25,34 @@
 	// 해당 유저의 이름과 이메일을 사전에 미리 입력된 상태로 만들 수 있음
 	// SELECT * FROM userinfo WHERE user_id=? 를 이용해서
 	// 로그인한 유저의 정보를 ResultSet rs변수에 받아주기
-  
+	 UserDAO dao = new UserDAO();
+	 UserVO user = dao.getUserInfo(sId);
      
+			
+	
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1> <%= sId %>님의 정보를 수정합니다.</h1>
+   <form action="userUpdateCheck.jsp" method="post">
+       <input type="hidden" name="fId" value="<%= sId %>"><br>
+       비밀번호 : <input type="password" name="fPw"><br>
+       이름 : <input type="text" name="fName" value="<%= user.getUserName()%>"><br>
+       이메일 : <input type="email" name="fEmail" value="<%= user.getEmail()%>"><br>
+       <input type="submit" value="수정하기">
+       
+   </form>
+</body>
+</html>
+
+
+<%-- 
+
 	    String dbType = "com.mysql.cj.jdbc.Driver";
 		String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
 		String connectId = "root";
@@ -44,25 +72,4 @@
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		rs.next();// 0번인덱스 조회를 위해 한번 실행해줘야함.
-			
-	
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-   <h1> <%= sId %>님의 정보를 수정합니다.</h1>
-   <form action="userUpdateCheck.jsp" method="post">
-       <input type="hidden" name="fId" value="<%= sId %>"><br>
-       비밀번호 : <input type="password" name="fPw"><br>
-       이름 : <input type="text" name="fName" value="<%= rs.getString(3)%>"><br>
-       이메일 : <input type="email" name="fEmail" value="<%= rs.getString(4)%>"><br>
-       <input type="submit" value="수정하기">
-       
-   </form>
-</body>
-</html>
+		rs.next();// 0번인덱스 조회를 위해 한번 실행해줘야함.--%>
