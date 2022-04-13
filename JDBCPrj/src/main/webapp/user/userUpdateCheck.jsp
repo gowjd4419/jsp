@@ -13,7 +13,7 @@
 		String fName = request.getParameter("fName");
 		String fEmail = request.getParameter("fEmail");
 		
-		UserDAO dao = new UserDAO();
+		UserDAO dao = UserDAO.getInstance();
 		dao.userUpdateCheck(fId, fPw, fName, fEmail);
 		response.sendRedirect("userLoginForm.jsp");
 		

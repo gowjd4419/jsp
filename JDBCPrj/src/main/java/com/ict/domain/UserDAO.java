@@ -7,22 +7,56 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 // DAT클래스는 DB연동시 반복적으로 작성하는 코드를 중복 작성하기 않기 위해 작성
 public class UserDAO {
 	// DB접속시 필요한 변수들을 아래에 선언
-	private String dbType = "com.mysql.cj.jdbc.Driver";
-	private String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
-	private String connectId = "root";
-	private String connectPw = "5613";
+	//private String dbType = "com.mysql.cj.jdbc.Driver";
+	//private String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
+	//private String connectId = "root";
+	//private String connectPw = "5613";
+	// 커넥션풀 사용을 위한 객체 생성(java.naming.DataSource)
+	private DataSource ds;
 	
 	// 생성자를 이용해 생성할 때 자동으로 Class.forName()을 세팅하게 만들어준다
 	// 어떤 쿼리문을 실행하더라도 위의 DB접속 변수와 DB종류지정은 무조건 하기에 생성자로 생성한다.
-	public UserDAO() {
+//	public UserDAO() {
+		// DataSource를 사용하도록 생성자 로직 변경
+	//	try {
+		//	Context ct = new InitialContext();
+			//ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
+		//} catch (Exception e) {
+			//e.printStackTrace();
+		//}
+	//}
+	
+	// 싱글턴 패턴 처리.
+	// DAO 내부에 멤버변수로 자기 자신(현 파일의 클래스명은 UserDAO 이므로 UserDAO 타입)변수 하나 생성
+	private static UserDAO dao = new UserDAO();
+	// 싱글턴은 요청시마다 DAO를 매번 새로 생성하지 않고, 먼저 하나를 생성해둔 다음
+	// 사용자 요청때는 이미 생성된 DAO의 주소값만 공유해서
+	// DAO 생성에 필요한 시간을 절약하기 위해 사용한다.
+	
+	// 싱글턴-1. 생성자는 private으로 처리해 외부에서 생성명령을 내릴 수 없게 처리한다.
+	private UserDAO() {
 		try {
-			Class.forName(dbType);
+			Context ct = new InitialContext();
+			ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 싱글턴 -2. static 키워드를 이용해서 단 한 번만 생성하고, 그 이후로는
+	// 주소를 공유하는 getInstance()메서드를 생성한다.
+	public static UserDAO getInstance() {
+		if(dao == null) {
+			dao = new UserDAO();
+		}
+		return dao;
 	}
 	
 	// getAllUserList.jsp의 핵심 로직을 DAO로 옮겨서 작성해보기
@@ -45,7 +79,7 @@ public class UserDAO {
 		try {
 			// getAllUserList.jsp를 참조해 아래 로직을 작성 완료하기
 			// Connection 생성
-			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			con = ds.getConnection();//context.xml 내부에 디비종류, 접속 url, mysql아이디, 비번이 기입됨.
 			// 쿼리문 저장
 			String sql = "SELECT * FROM userinfo";
 			// PreparedStatement에 쿼리문 입력
@@ -99,7 +133,7 @@ public class UserDAO {
 
 		try {
 			
-			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			con = ds.getConnection();
 			String sql = "SELECT * FROM userinfo WHERE user_id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, userId);
@@ -136,7 +170,7 @@ public class UserDAO {
 		PreparedStatement pstmt = null;
 	try {
 			
-			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+		con = ds.getConnection();
 			String sql = "DELETE FROM userinfo WHERE user_id = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, user_Id);
@@ -166,7 +200,7 @@ public class UserDAO {
 		
 try {
 			
-			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+	        con = ds.getConnection(); 
 			String sql = "INSERT INTO userinfo VALUES (?, ?, ?, ?)";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, Id);
@@ -193,7 +227,7 @@ try {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = DriverManager.getConnection(connectUrl,connectId,connectPw);
+			con = ds.getConnection();
 			String sql = "UPDATE userinfo SET user_pw=?, user_name=?, email=? WHERE user_id=?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(4, Id);
@@ -215,3 +249,4 @@ try {
 	}// userUpdateCheck끝나는 지점.
 	
 }// UserDAO 끝나는 지점.
+

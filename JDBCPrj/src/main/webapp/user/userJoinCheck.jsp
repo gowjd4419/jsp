@@ -16,7 +16,7 @@
 	 // 회원가입을 처리하는 로직
 	 // 쿼리문은 INSERT INTO userinfo VALUES
 	 //                   (아이디, 비번, 이름,이메일);
-		UserDAO dao = new UserDAO();
+		UserDAO dao = UserDAO.getInstance();
 		dao.userJoinCheck(formId, formPw, formName, formEmail);
 		response.sendRedirect("userLoginForm.jsp");
  

@@ -18,7 +18,7 @@
     
         session.invalidate(); // 세션파기
         // DAO 생성
-         UserDAO dao = new UserDAO();
+        UserDAO dao = UserDAO.getInstance();
         // .deleterUser(유저명) 호출
         dao.userDelete(sId);
         // 다시 로그인창으로 리다이렉트 해서 보내기
