@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    jsp로 들어온 값: ${jsp }<br>
-    boot로 들어온 값: ${boot }<br>
-    jpa로 들어온 값: ${jpa }<br>
+<h1>아이디가 없습니다.</h1><br>
+<a href="userLoginForm.jsp">다시 로그인</a>
 </body>
 </html>
