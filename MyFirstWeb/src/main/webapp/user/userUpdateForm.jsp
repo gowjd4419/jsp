@@ -25,7 +25,7 @@
 	// 해당 유저의 이름과 이메일을 사전에 미리 입력된 상태로 만들 수 있음
 	// SELECT * FROM userinfo WHERE user_id=? 를 이용해서
 	// 로그인한 유저의 정보를 ResultSet rs변수에 받아주기
-	 UserDAO dao = new UserDAO();
+	 UserDAO dao = UserDAO.getInstance();//싱글턴으로 바꾼이후 new키워드로 생성불가.
 	 UserVO user = dao.getUserInfo(sId);
      
 			

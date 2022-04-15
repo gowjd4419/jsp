@@ -41,7 +41,7 @@ public class UserDAO {
 	// DAO 생성에 필요한 시간을 절약하기 위해 사용한다.
 	
 	// 싱글턴-1. 생성자는 private으로 처리해 외부에서 생성명령을 내릴 수 없게 처리한다.
-	private UserDAO() {
+	UserDAO() {
 		try {
 			Context ct = new InitialContext();
 			ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
