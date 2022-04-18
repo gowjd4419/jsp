@@ -40,14 +40,14 @@
 	</section>
 	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
 		<item key="DIALOG_X_ORIGIN" value="203"/>
-		<item key="DIALOG_Y_ORIGIN" value="0"/>
+		<item key="DIALOG_Y_ORIGIN" value="-19"/>
 		<item key="DIALOG_WIDTH" value="823"/>
 		<item key="DIALOG_HEIGHT" value="1008"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="DialogBounds_GenerateToStringDialog">
 		<item key="DIALOG_X_ORIGIN" value="271"/>
-		<item key="DIALOG_Y_ORIGIN" value="-5"/>
+		<item key="DIALOG_Y_ORIGIN" value="-19"/>
 		<item key="DIALOG_WIDTH" value="687"/>
 		<item key="DIALOG_HEIGHT" value="1008"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

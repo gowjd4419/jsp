@@ -84,7 +84,48 @@ public class BoardDAO {
 		  }
 		}
 		return boardList;
-	}
+	}//getBoardList마무리
+	
+	// boardtbl에서 row 1개를 가져오거나(글번호존재시), 안가져옴(없는글번호 입력시)
+	public BoardVO getBoardDetail(int boardNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		BoardVO board = new BoardVO();
+		try {
+			con = ds.getConnection();
+			String sql = "SELECT * FROM boardtbl WHERE board_num=?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1,boardNum);
+            
+            
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+    			board.setBoardNum(rs.getInt(1));
+    			board.setTitle(rs.getString(2));
+    			board.setContent(rs.getString(3));
+    			board.setWriter(rs.getString(4));
+    			board.setBdate(rs.getDate(5));
+    			board.setMdate(rs.getDate(6));
+    			board.setHit(rs.getInt(7));
+    			
+    			}else {
+    				System.out.println("계정이 없습니다.");
+    			}
+            
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}return board;
+	} //getBoardDetail마무리
 	
 
 }
