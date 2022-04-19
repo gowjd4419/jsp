@@ -34,14 +34,14 @@ public class getBoardDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// request.getParameter()는 무조건 문자로만 데이터를 전달함
 		String strBoardNum = request.getParameter("board_num");
-		int boardNum = Integer.parseInt(strBoardNum); //정수로 바꿔줘야함.
+		int boardNum = Integer.parseInt(strBoardNum); // 위에 저장된 문자1을 숫자 1 정수로 바꿔줘야함.
 		System.out.println("조회예정인 글번호 : " + boardNum);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		BoardVO board = dao.getBoardDetail(boardNum);
 		System.out.println(board);
 		
-		request.setAttribute("boardNum", boardNum);
+		request.setAttribute("board", board);
 		
 		RequestDispatcher dp = request.getRequestDispatcher("/board/boardDetail.jsp");
 		dp.forward(request,response);

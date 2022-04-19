@@ -7,32 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>/boardDetail 임시 페이지</h1>
-     <table border="1">
-         <thead>
-             <tr>
-                <td>글번호</td>
-                <td>글제목</td>
-                <td>글쓴이</td>
-                <td>쓴날짜</td>
-                <td>수정날짜</td>
-                <td>조회수</td>
-             </tr>
-         
-         </thead>
-          <tbody>
-             <c:forEach var="board" items="${boardDetail }">
-              <tr>
-                 <td>${board.boardNum }</td>
-                 <td>${board.title }</td>
-                 <td>${board.writer }</td>
-                 <td>${board.bdate }</td>
-                 <td>${board.mdate }</td>
-                 <td>${board.hit }</td>
-              </tr>
-              </c:forEach>
-          </tbody>
-     </table>
+<h1>${board.boardNum }번 글 조회중입니다.</h1><br>
+제목 : <input type="text" value="${board.title }">조회수 : ${board.hit }<br>
+본문 : <textarea cols="40" rows="10">${board.content }</textarea><br>
+글쓴이 : <input type="text" value="${board.writer }"><br>
+쓴날짜 : ${board.bdate }
+마지막 수정날짜 : ${board.mdate }
 
 </body>
 </html>

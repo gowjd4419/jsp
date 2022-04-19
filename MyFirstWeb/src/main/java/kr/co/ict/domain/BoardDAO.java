@@ -127,5 +127,7 @@ public class BoardDAO {
 		}return board;
 	} //getBoardDetail마무리
 	
+	
+	
 
 }
