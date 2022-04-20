@@ -44,7 +44,7 @@ public class BoardDAO {
 			// Connection 생성
 			con = ds.getConnection();//context.xml 내부에 디비종류, 접속 url, mysql아이디, 비번이 기입됨.
 			// 쿼리문 저장
-			String sql = "SELECT * FROM boardTbl";
+			String sql = "SELECT * FROM boardTbl order by bdate desc";
 			// PreparedStatement에 쿼리문 입력
 			pstmt = con.prepareStatement(sql);
 			
@@ -87,6 +87,7 @@ public class BoardDAO {
 	}//getBoardList마무리
 	
 	// boardtbl에서 row 1개를 가져오거나(글번호존재시), 안가져옴(없는글번호 입력시)
+	// SELECT 구문 사용시에만 void사용안함 리턴자료형 사용
 	public BoardVO getBoardDetail(int boardNum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -127,7 +128,58 @@ public class BoardDAO {
 		}return board;
 	} //getBoardDetail마무리
 	
-	
-	
+		public void boardInsert(String title, String content, String writer) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			try {
+				con = ds.getConnection();
+				String sql = "INSERT INTO boardTbl (title,content,writer) VALUES(?,?,?)";
+				 pstmt = con.prepareStatement(sql);
+				 
+				    pstmt.setString(1, title);
+		            pstmt.setString(2, content);
+		            pstmt.setString(3, writer);
+
+		            pstmt.executeUpdate();
+				 
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				try {
+					con.close();
+					pstmt.close();
+					
+				    }catch(Exception e){
+				    	e.printStackTrace();
+				    }
+			}
+		}// boardInsert 마무리
+		
+	public void boardDelete(int boardNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			String sql = "DELETE FROM boardTbl WHERE board_num = ?";
+			 pstmt = con.prepareStatement(sql);
+			 
+			    pstmt.setInt(1, boardNum); 
+
+	            pstmt.executeUpdate();
+			 
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				
+			    }catch(Exception e){
+			    	e.printStackTrace();
+			    }
+	         }
+	    }// boardDelete 마무리
 
 }
