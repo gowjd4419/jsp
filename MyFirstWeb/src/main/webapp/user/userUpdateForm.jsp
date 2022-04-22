@@ -44,7 +44,7 @@
        비밀번호 : <input type="password" name="fPw"><br>
        이름 : <input type="text" name="fName" value="<%= user.getUserName()%>"><br>
        이메일 : <input type="email" name="fEmail" value="<%= user.getEmail()%>"><br>
-       <input type="submit" value="수정하기">
+       <input type="submit" value="수정하기"> 
        
    </form>
 </body>
