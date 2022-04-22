@@ -3,8 +3,8 @@ package kr.co.ict.domain;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -182,4 +182,32 @@ public class BoardDAO {
 	         }
 	    }// boardDelete 마무리
 
+	public void boardUpdate(String title, String content, String writer, int boardNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();                                    // 수정날짜 고치기
+			String sql = "UPDATE boardTbl SET title=?,content=?,writer=?, mdate=now() WHERE board_num=?";
+			 pstmt = con.prepareStatement(sql);
+			 
+			    pstmt.setString(1, title); 
+			    pstmt.setString(2, content); 
+			    pstmt.setString(3, writer); 
+			    pstmt.setInt(4, boardNum); 
+
+	            pstmt.executeUpdate();
+			 
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				
+			    }catch(Exception e){
+			    	e.printStackTrace();
+			    }
+	         }
+	}// boardUpdate 마무리
 }
