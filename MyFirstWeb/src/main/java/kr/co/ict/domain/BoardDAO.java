@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
+//오늘 갑자기 ArrayList 임폴트 부분에서 오류가 났는데
+//같은 계열인 링크드 리스트를 임폴트했다가 다시 ArrayList 임폴트를 하니까
+//됐다 이유는 아무도모름
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
