@@ -213,4 +213,5 @@ public class BoardDAO {
 			    }
 	         }
 	}// boardUpdate 마무리
+
 }
