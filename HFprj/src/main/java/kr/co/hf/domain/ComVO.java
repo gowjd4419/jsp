@@ -1,4 +1,5 @@
 package kr.co.hf.domain;
+import kr.co.hf.domain.ComVO;
 
 public class ComVO {
     private int commentID;

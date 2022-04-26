@@ -42,7 +42,7 @@ public class getComDetail extends HttpServlet {
 		
 		request.setAttribute("com", com);
 		
-		RequestDispatcher dp = request.getRequestDispatcher("/board/boardDetail.jsp");
+		RequestDispatcher dp = request.getRequestDispatcher("/Com/ComDetail.jsp");
 		dp.forward(request,response);
 	}
 

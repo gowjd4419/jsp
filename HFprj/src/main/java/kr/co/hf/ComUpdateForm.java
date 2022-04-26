@@ -39,7 +39,7 @@ public class ComUpdateForm extends HttpServlet {
 		
 		request.setAttribute("com", com);
 		
-		RequestDispatcher dp = request.getRequestDispatcher("/board/ComUpdateForm.jsp");
+		RequestDispatcher dp = request.getRequestDispatcher("/Com/ComUpdateForm.jsp");
 		dp.forward(request,response);
 	}
 

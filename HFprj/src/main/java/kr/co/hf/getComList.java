@@ -57,7 +57,7 @@ public class getComList extends HttpServlet {
 		
 		request.setAttribute("ComList", ComList);
 		
-		RequestDispatcher dp = request.getRequestDispatcher("/board/getComList.jsp");
+		RequestDispatcher dp = request.getRequestDispatcher("/Com/getComList.jsp");
 		dp.forward(request,response);
 	}
 

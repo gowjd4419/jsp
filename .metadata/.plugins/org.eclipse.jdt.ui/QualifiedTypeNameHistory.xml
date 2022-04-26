@@ -16,4 +16,6 @@
     <fullyQualifiedTypeName name="kr.co.ict.domain.BoardDAO"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="kr.co.hf.domain.ComVO"/>
+    <fullyQualifiedTypeName name="kr.co.hf.domain.ComDAO"/>
 </qualifiedTypeNameHistroy>

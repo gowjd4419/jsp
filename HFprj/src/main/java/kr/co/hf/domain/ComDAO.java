@@ -41,7 +41,7 @@ public class ComDAO {
 		List<ComVO> ComList = new ArrayList<>();
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT * FROM comment WHERE postID = ?, 10";
+			String sql = "SELECT * FROM comment WHERE postID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,postID);
 			

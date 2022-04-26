@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-     <h1>/boardList 임시 페이지</h1>
      <table border="1">
          <thead>
              <tr>
