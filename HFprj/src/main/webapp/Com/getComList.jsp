@@ -32,13 +32,13 @@
           <tbody>
              <c:forEach var="Com" items="${ComList}">
               <tr>
-                <td><a href="http://localhost:8181/MyFirstWeb/ComDetail?commentID=${Com.commentID}">${Com.commentID }</td>
+                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${Com.commentID}">${Com.commentID }</td>
                  <td>${Com.getCommentAuthor()}</td>
                  <td>${Com.getCommentContent()}</td>
               </tr>
               </c:forEach>
           </tbody>
      </table>
-     <a href="http://localhost:8181/MyFirstWeb/Com/ComInsertForm.jsp"><button>댓글쓰기</button></a>
+     <a href="http://localhost:8181/HFprj/ComInsertForm.jsp"><button>댓글쓰기</button></a>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class ComInsert extends HttpServlet {
 		dao.ComInsert(commentAuthor, commentContent, commentID, postID);
 		
 		// /boardList로 리다이렉트(서블릿 주소로 리다이렉트시 파일이름 노출 안됨)
-		response.sendRedirect("http://localhost:8181/MyFirstWeb/ComList");
+		response.sendRedirect("http://localhost:8181/HFprj/ComList");
 		// 포워딩을하려면 디비 한번더 호출해야하기 때문에 이번엔 리다이렉트 사용
 	}
 

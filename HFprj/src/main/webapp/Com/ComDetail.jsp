@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+${Com.commentID }
+${Com.com }
 <h1>${Com.commentID }번 댓글 조회중입니다.</h1><br>
 내용 : <textarea cols="30" rows="10">${Com.commentContent }</textarea><br>
 작성자 : <input type="text" value="${Com.commentAuthor }"><br>
