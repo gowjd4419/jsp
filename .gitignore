@@ -2,3 +2,6 @@
 
 # test2.txt는 github에 업로드 하지 않겠다는 선언
 test2.txt
+
+# 폴더명/ 는 해당 폴더를 github에 업로드 X
+testfolder/
