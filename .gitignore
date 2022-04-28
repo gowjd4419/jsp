@@ -11,3 +11,5 @@ test.txt
 
 # Servers 폴더도 배제
 Servers/
+
+.metadata/
