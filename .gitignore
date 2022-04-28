@@ -8,3 +8,6 @@ testfolder/
 
 # 이미 업로드된 파일을 . gitignore 영향을 안 받음
 test.txt
+
+# Servers 폴더도 배제
+Servers/
