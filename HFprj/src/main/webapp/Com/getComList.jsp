@@ -39,6 +39,6 @@
               </c:forEach>
           </tbody>
      </table>
-     <a href="http://localhost:8181/HFprj/ComInsertForm.jsp"><button>댓글쓰기</button></a>
+     <a href="http://localhost:8181/HFprj/Com/ComInsertForm.jsp"><button>댓글쓰기</button></a>
 </body>
 </html>

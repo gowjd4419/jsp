@@ -48,7 +48,8 @@ public class getComList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String postid = request.getParameter("postID");
+		//String postid = request.getParameter("postID");
+		String postid = "1";
 		int postID = Integer.parseInt(postid);
 		
 		ComDAO dao = ComDAO.getInstance();

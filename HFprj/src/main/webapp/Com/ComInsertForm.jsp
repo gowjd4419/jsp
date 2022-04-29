@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="http://localhost:8181/MyFirstWeb/ComInsert" method="post">
+<form action="http://localhost:8181/HFprj/ComInsert" method="post">
    작성자 : <input type="text" name="commentAuthor"><br>
    내용 : <textarea cols="30" rows="15" name="commentContent"></textarea><br>
    <input type="submit" value="글쓰기">

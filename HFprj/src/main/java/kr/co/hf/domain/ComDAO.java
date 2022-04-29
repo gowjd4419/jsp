@@ -116,19 +116,18 @@ public class ComDAO {
 		return Com;
 	}//getComDetail 마무리
 	
-	public void ComInsert(String commentContent,String commentAuthor, int postID, int commentID) {
+	public void ComInsert(String commentContent,String commentAuthor, int postID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			con = ds.getConnection();
-			String sql = "INSERT INTO comment (commentContent,commentAuthor,postID,commentID) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO comment (commentContent,commentAuthor,postID,commentID) VALUES(?,?,?,null)";
 			 pstmt = con.prepareStatement(sql);
 			 
 			    pstmt.setString(1, commentContent);
 			    pstmt.setString(2, commentAuthor);
 			    pstmt.setInt(3, postID);
-			    pstmt.setInt(4, commentID);
 	           
 	            pstmt.executeUpdate();
 			 

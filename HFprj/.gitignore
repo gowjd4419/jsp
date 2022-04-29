@@ -19,5 +19,12 @@
 
 .settings/
 bin/
+<<<<<<< HEAD
+assets/
+build/
+=======
+.metadata/
+bulid/
+assets/
 
-
+>>>>>>> comment
