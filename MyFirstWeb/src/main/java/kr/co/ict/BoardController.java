@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.ict.domain.BoardDAO;
 import kr.co.ict.domain.BoardVO;
+import kr.co.ict.service.BoardDeleteService;
 import kr.co.ict.service.BoardDetailService;
+import kr.co.ict.service.BoardInsertService;
 import kr.co.ict.service.BoardListService;
+import kr.co.ict.service.BoardUpdateFormService;
+import kr.co.ict.service.BoardUpdateService;
 import kr.co.ict.service.IBoardService;
 
 /**
@@ -75,37 +79,22 @@ public class BoardController extends HttpServlet {
 		 ui = "/board/boardInsertForm.jsp";
 			
 	   }else if(uri.equals("/MyFirstWeb/boardInsert.do")) {
-			String title = request.getParameter("title");
-			String writer = request.getParameter("writer");
-			String content = request.getParameter("content");
-			dao.boardInsert(title, content, writer);
+			sv = new BoardInsertService();
+			sv.execute(request, response);
 			ui = "/boardList.do"; // 리다이렉트시는 폴더명 없이 마지막 주소만 적기
 	   }else if(uri.equals("/MyFirstWeb/boardDelete.do")) {
-		   String num = request.getParameter("num");
-			int boardNum = Integer.parseInt(num);
-			
-			dao.boardDelete(boardNum);
+		    sv = new BoardDeleteService();
+		    sv.execute(request, response);
 			ui = "/boardList.do";
 	   }else if(uri.equals("/MyFirstWeb/boardUpdateForm.do")) {
-		   String boardnum = request.getParameter("board_num");
-			int boardNum = Integer.parseInt(boardnum);
-			
-			BoardVO board = dao.getBoardDetail(boardNum);
-			
-			request.setAttribute("board", board);
-			// 리다이렉트(boardNum번 detail페이지로 이동.)
+		    sv = new BoardUpdateFormService();
+		    sv.execute(request, response);
 			ui = "/board/boardUpdateForm.jsp";
 	   }else if(uri.equals("/MyFirstWeb/boardUpdate.do")) {
-			String boardnum = request.getParameter("board_num");
-			int boardNum = Integer.parseInt(boardnum);
-			
-			String title = request.getParameter("title");
-			String writer = request.getParameter("writer");
-			String content = request.getParameter("content");
-			
-			dao.boardUpdate(title, content, writer, boardNum);
-			// 리다이렉트(boardNum번 detail페이지로 이동.)
-            ui = "/boardDetail.do?board_num=" + boardNum;
+			sv = new BoardUpdateService();
+			sv.execute(request, response);
+            ui = "/boardDetail.do?board_num=" + request.getParameter("board_num");
+            // 리다이렉트(boardNum번 detail페이지로 이동.)
 	   }
     	RequestDispatcher dp = request.getRequestDispatcher(ui);
     	dp.forward(request, response);
