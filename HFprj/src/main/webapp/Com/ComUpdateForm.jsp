@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="http://localhost:8181/HFprj/ComUpdate" method="post">
+<form action="http://localhost:8181/HFprj/ComUpdate.do" method="post">
   <input type="hidden" name="commentID" value="${com.commentID }">
   <input type="hidden" name="postID" value="${com.postID }">
    작성자 : <input type="text" name="commentAuthor" value="${com.commentAuthor}" readonly><br>

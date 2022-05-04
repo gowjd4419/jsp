@@ -18,6 +18,8 @@ import kr.co.hf.service.BoardInsertService;
 import kr.co.hf.service.BoardListService;
 import kr.co.hf.service.BoardUpdateFormService;
 import kr.co.hf.service.BoardUpdateService;
+import kr.co.hf.service.ComDeleteService;
+import kr.co.hf.service.ComInsertService;
 import kr.co.hf.service.ComUpdateFormService;
 import kr.co.hf.service.ComUpdateService;
 import kr.co.hf.service.IBoardService;
@@ -131,13 +133,39 @@ public class BoardController extends HttpServlet {
 			
 			ui = "recipe/recipeDetail.jsp";
 			
-		} else if(uri.equals("/HFprj/comUpdateForm.do")) {
+		} else if(uri.equals("/HFprj/ComUpdateForm.do")) {
 			
 			IRsv = new ComUpdateFormService();
 			
 			IRsv.execute(request, response);
 			
-			ui = "/com/comUpdateForm.jsp";
+			ui = "/Com/ComUpdateForm.jsp";
+		
+		} else if(uri.equals("/HFprj/ComUpdate.do")) {
+			
+			IRsv = new ComUpdateService();
+			
+			IRsv.execute(request, response);
+			
+			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
+			
+		} else if(uri.equals("/HFprj/ComDelete.do")) {
+			IRsv = new ComDeleteService();
+			IRsv.execute(request, response);
+			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
+			
+		} else if(uri.equals("/HFprj/ComInsertForm.do")) {
+			
+			ui = "/Com/ComInsertForm.jsp";
+		
+		} else if(uri.equals("/HFprj/ComInsert.do")) {
+			
+			IRsv = new ComInsertService();
+			
+			IRsv.execute(request, response);
+			
+			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
+			
 		}
 		
 		RequestDispatcher dp = request.getRequestDispatcher(ui);

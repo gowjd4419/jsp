@@ -16,6 +16,7 @@ public class ComUpdateFormService implements IRecipeService{
 		String commentid = request.getParameter("commentID");
 		int commentID = Integer.parseInt(commentid);
 		
+		System.out.println("commentID");
 		ComDAO dao = ComDAO.getInstance();
 		ComVO com = dao.getComDetail(commentID);
 		request.setAttribute("com", com);

@@ -82,6 +82,68 @@ public class LikeDAO {
 		
 	}
 	
+	public void createLike(int postID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			String s = "INSERT INTO like VALUES(?,?,?,?)";
+			pstmt = con.prepareStatement(s);
+			pstmt.setInt(1, postID);
+			pstmt.setInt(2, postID);
+			pstmt.setInt(3, postID);
+			pstmt.setInt(4, postID);
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+		
+		
+	}
+	
+	public void toggleLike(int postID, int likeType){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			String s = "UPDATE like SET likeType=? WHERE postID=?";
+			pstmt = con.prepareStatement(s);
+			if(likeType == 0) {
+				pstmt.setInt(1, 1);
+			}else if(likeType == 1) {
+				pstmt.setInt(1, 0);
+			}
+			pstmt.setInt(2, postID);
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+		
+		
+	}
+	
 
 	
 	

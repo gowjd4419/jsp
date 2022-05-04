@@ -19,7 +19,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 제목 : ${board.postTitle}
 <br/>
 postID : ${board.postID}
@@ -70,26 +69,33 @@ postAuthor : ${board.postAuthor}
              </tr>
          </thead>
           <tbody>
-             <c:forEach var="Com" items="${ComList}">
+             <c:forEach var="com" items="${ComList}">
               <tr>
-                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${Com.commentID}">${Com.commentID }</td>
-                 <td>${Com.getCommentAuthor()}</td>
-                 <td>${Com.getCommentContent()}<form action="http://localhost:8181/HFprj/ComDelete" method="post">
+                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${com.commentID}">${com.commentID }</td>
+                 <td>${com.getCommentAuthor()}</td>
+                 <td>${com.getCommentContent()}<form action="http://localhost:8181/HFprj/ComDelete.do" method="post">
 				        <input type="hidden" name="commentID" value="${com.commentID}">
+				        <input type="hidden" name="postID" value="${com.postID}">
 				        <input type="submit" value="삭제" >
 				       </form>
-				       <form action="http://localhost:8181/HFprj/ComUpdateForm" method="post">
+				       <form action="http://localhost:8181/HFprj/ComUpdateForm.do" method="post">
 					   <input type="hidden" name="commentID" value="${com.commentID }">
-					   <input type="hidden" name="commenContent" value="${com.content }">
-                       <input type="hidden" name="commentAuthor" value="${com.author }">
+					   <input type="hidden" name="commenContent" value="${com.commentContent }">
+                       <input type="hidden" name="commentAuthor" value="${com.commentAuthor }">
 					   <input type="submit" value="수정">
-					   
 					 </form>
 				  </td>
               </tr>
               </c:forEach>
           </tbody>
      </table>
-     <a href="http://localhost:8181/HFprj/Com/ComInsertForm.jsp"><button>댓글쓰기</button></a>
+     
+	 <form action="/HFprj/ComInsertForm.do" method="post">
+	    <c:forEach var="com" items="${ComList}">
+	     	<input type="hidden" name="postID" value="${com.postID}">
+		</c:forEach>
+			<input type="submit" value="댓글쓰기">
+	 </form>
+    
 </body>
 </html>

@@ -30,11 +30,11 @@
              </tr>
          </thead>
           <tbody>
-             <c:forEach var="Com" items="${ComList}">
+             <c:forEach var="com" items="${ComList}">
               <tr>
-                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${Com.commentID}">${Com.commentID }</td>
-                 <td>${Com.getCommentAuthor()}</td>
-                 <td>${Com.getCommentContent()}</td>
+                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${com.commentID}">${com.commentID }</td>
+                 <td>${com.getCommentAuthor()}</td>
+                 <td>${com.getCommentContent()}</td>
               </tr>
               </c:forEach>
           </tbody>

@@ -38,8 +38,6 @@ public class RankDAO {
 		return dao;
 	}
 	
-	
-	
 	public List<RankVO> getRankOrderedList(int postID){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -81,10 +79,107 @@ public class RankDAO {
 		
 	}
 	
-
-	
-	
-	
+	public void updateRank(int postID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		try {
+			con = ds.getConnection();
+			String s = "UPDATE ranking SET rankPosition=? WHERE postID=?";
+			pstmt = con.prepareStatement(s);
+			pstmt.setInt(1, postID);
+			pstmt.setInt(1, postID);
+			rs = pstmt.executeQuery();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
 	
+	public void insertRank(int postID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			String s = "INSERT INTO ranking VALUES (?,?,?) WHERE postID=?";
+			pstmt = con.prepareStatement(s);
+			pstmt.setInt(1, postID);
+			pstmt.setInt(1, postID);
+			pstmt.setInt(1, postID);
+			pstmt.setInt(1, postID);
+			rs = pstmt.executeQuery();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
+	
+	public void deleteRank(int postID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			String s = "DELETE FROM ranking WHERE rankID=?";
+			pstmt = con.prepareStatement(s);
+			pstmt.setInt(1, postID);
+			rs = pstmt.executeQuery();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
+	
+	public int getCount(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int count = 0;
+		
+		try {
+			con = ds.getConnection();
+			String s = "DELETE FROM ranking WHERE rankID=?";
+			pstmt = con.prepareStatement(s);
+			count = pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 }
