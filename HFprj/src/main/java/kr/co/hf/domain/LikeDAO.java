@@ -11,14 +11,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class PreviewDAO {
+public class LikeDAO {
 	
 	
 	private DataSource ds;
 
-	public static PreviewDAO dao = new PreviewDAO();
+	public static LikeDAO dao = new LikeDAO();
 	
-	private PreviewDAO() {
+	private LikeDAO() {
 		try {
 			Context ct = new InitialContext();
 			ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
@@ -26,54 +26,46 @@ public class PreviewDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} // PreviewDAO END;
+	}
 	
 
 	
-	public static PreviewDAO getInstance() {
+	public static LikeDAO getInstance() {
 		
 		if(dao == null) {
-			dao = new PreviewDAO();
+			dao = new LikeDAO();
 		}
 		return dao;
-	} //  previewDAO getINstance() END;
+	}
 	
 	
 	
-	public List<PreviewVO> getPriviewList(int postID){
+	public List<LikeVO> getLikeOrderedList(int postID){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		
-		List<PreviewVO> previewList = new ArrayList<>();
+		List<LikeVO> likeList = new ArrayList<>();
 		
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT * FROM preview WHERE postID =? ORDER BY postTime DESC";
-			pstmt = con.prepareStatement(sql);
-
+			String s = "SELECT * FROM rank ORDER BY rankPosition DESC";
+			pstmt = con.prepareStatement(s);
 			pstmt.setInt(1, postID);
-			
 			rs = pstmt.executeQuery();
 			
 			for(int i = 0; i < 10; i++) {
 				if(rs.next()) {
-					PreviewVO preview = new PreviewVO();
-					
-					preview.setPreviewID(rs.getInt(1));
-					preview.setPostID(rs.getInt(2));
-					preview.setPreviewContent(rs.getString(3));
-					preview.setPreviewLink(rs.getString(4));
-					
-					System.out.println("preview값 디버깅 : " + preview);
-					previewList.add(preview);
+					LikeVO like = new LikeVO();
+					like.setLikeID(rs.getInt(1));
+					like.setPostID(rs.getInt(3));
+					like.setUserID(rs.getInt(4));
+                    like.setLikeType(rs.getInt(2));
+					likeList.add(like);
 					
 				}
-			}
-			
-			System.out.println("previeList 값 디버깅 : " + previewList);
-			
+			}			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -85,11 +77,10 @@ public class PreviewDAO {
 				e.printStackTrace();
 			}
 		}
+		return likeList;
 		
-		return previewList;
 		
-		
-	} // getPreviewList() END;
+	}
 	
 
 	

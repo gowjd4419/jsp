@@ -36,7 +36,7 @@ public class ComUpdateForm extends HttpServlet {
 		
 		ComDAO dao = ComDAO.getInstance();
 		ComVO com = dao.getComDetail(commentID);
-		
+		System.out.println(com);
 		request.setAttribute("com", com);
 		
 		RequestDispatcher dp = request.getRequestDispatcher("/Com/ComUpdateForm.jsp");

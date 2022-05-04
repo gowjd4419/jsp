@@ -11,14 +11,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class PreviewDAO {
+public class RankDAO {
 	
 	
 	private DataSource ds;
 
-	public static PreviewDAO dao = new PreviewDAO();
+	public static RankDAO dao = new RankDAO();
 	
-	private PreviewDAO() {
+	private RankDAO() {
 		try {
 			Context ct = new InitialContext();
 			ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
@@ -26,54 +26,45 @@ public class PreviewDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	} // PreviewDAO END;
+	}
 	
 
 	
-	public static PreviewDAO getInstance() {
+	public static RankDAO getInstance() {
 		
 		if(dao == null) {
-			dao = new PreviewDAO();
+			dao = new RankDAO();
 		}
 		return dao;
-	} //  previewDAO getINstance() END;
+	}
 	
 	
 	
-	public List<PreviewVO> getPriviewList(int postID){
+	public List<RankVO> getRankOrderedList(int postID){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		
-		List<PreviewVO> previewList = new ArrayList<>();
+		List<RankVO> rankList = new ArrayList<>();
 		
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT * FROM preview WHERE postID =? ORDER BY postTime DESC";
-			pstmt = con.prepareStatement(sql);
-
+			String s = "SELECT * FROM ranking ORDER BY rankPosition ASC LIMIT 3";
+			pstmt = con.prepareStatement(s);
 			pstmt.setInt(1, postID);
-			
 			rs = pstmt.executeQuery();
 			
 			for(int i = 0; i < 10; i++) {
 				if(rs.next()) {
-					PreviewVO preview = new PreviewVO();
-					
-					preview.setPreviewID(rs.getInt(1));
-					preview.setPostID(rs.getInt(2));
-					preview.setPreviewContent(rs.getString(3));
-					preview.setPreviewLink(rs.getString(4));
-					
-					System.out.println("preview값 디버깅 : " + preview);
-					previewList.add(preview);
+					RankVO rank = new RankVO();
+					rank.setRankID(rs.getInt(1));
+					rank.setPostID(rs.getInt(2));
+					rank.setRankPosition(rs.getInt(3));
+					rankList.add(rank);
 					
 				}
-			}
-			
-			System.out.println("previeList 값 디버깅 : " + previewList);
-			
+			}			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -85,11 +76,10 @@ public class PreviewDAO {
 				e.printStackTrace();
 			}
 		}
+		return rankList;
 		
-		return previewList;
 		
-		
-	} // getPreviewList() END;
+	}
 	
 
 	

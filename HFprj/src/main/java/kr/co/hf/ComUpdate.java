@@ -34,9 +34,11 @@ public class ComUpdate extends HttpServlet {
 		
 		String content = request.getParameter("commentContent");
 		String author = request.getParameter("commentAuthor");
+		System.out.println(content);
+		System.out.println(author);
 		
 		ComDAO dao = ComDAO.getInstance();
-		dao.ComUpdate(author, content, commentID);
+		dao.ComUpdate(content, author, commentID);
 		// 리다이렉트(commentID번 detail페이지로 이동.)
 		response.sendRedirect("http://localhost:8181/HFprj/ComDetail?commentID=" + commentID);
 	}

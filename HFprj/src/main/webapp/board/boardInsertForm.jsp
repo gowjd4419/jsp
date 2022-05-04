@@ -14,8 +14,8 @@
 	postTitle : <input type="text" name="postTitle" placeholder="제목을 적어주세요."><br/>
 	postContent : <textarea name="postContent" placeholder="내용을 적어주세요."></textarea><br/>
 	postType : <input type="text" name="postType" placeholder="현재 구현되는 0만 적어주세요"><br/>
-	postAuthor : <input type="hidden" name="postAuthor">
-
+	postAuthor : <input type="text" name="postAuthor" placeholder="현재 구현되는 1만 쓸 것"><br/>
+	<input type="submit" value="확인" class="btn btn-success btn-mb-3">
 </form>
 
 </body>

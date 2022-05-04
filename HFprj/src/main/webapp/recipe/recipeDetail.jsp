@@ -4,6 +4,16 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
+<style>
+
+    body{
+    font:15px/1.5 "굴림",Gulim;
+    margin:10px;
+    padding:50px;
+    }
+</style>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -51,5 +61,35 @@ postAuthor : ${board.postAuthor}
 </div>
 
 
+ <table class="table table-bordered table-hover table-dark">
+         <thead>
+             <tr>
+                <td>댓글번호</td>
+                <td>글쓴이</td>
+                <td>내용</td>
+             </tr>
+         </thead>
+          <tbody>
+             <c:forEach var="Com" items="${ComList}">
+              <tr>
+                <td><a href="http://localhost:8181/HFprj/ComDetail?commentID=${Com.commentID}">${Com.commentID }</td>
+                 <td>${Com.getCommentAuthor()}</td>
+                 <td>${Com.getCommentContent()}<form action="http://localhost:8181/HFprj/ComDelete" method="post">
+				        <input type="hidden" name="commentID" value="${com.commentID}">
+				        <input type="submit" value="삭제" >
+				       </form>
+				       <form action="http://localhost:8181/HFprj/ComUpdateForm" method="post">
+					   <input type="hidden" name="commentID" value="${com.commentID }">
+					   <input type="hidden" name="commenContent" value="${com.content }">
+                       <input type="hidden" name="commentAuthor" value="${com.author }">
+					   <input type="submit" value="수정">
+					   
+					 </form>
+				  </td>
+              </tr>
+              </c:forEach>
+          </tbody>
+     </table>
+     <a href="http://localhost:8181/HFprj/Com/ComInsertForm.jsp"><button>댓글쓰기</button></a>
 </body>
 </html>

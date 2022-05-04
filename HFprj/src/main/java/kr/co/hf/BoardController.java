@@ -12,11 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.hf.domain.BoardDAO;
 import kr.co.hf.domain.BoardVO;
+import kr.co.hf.service.BoardDeleteService;
+import kr.co.hf.service.BoardDetailService;
+import kr.co.hf.service.BoardInsertService;
+import kr.co.hf.service.BoardListService;
+import kr.co.hf.service.BoardUpdateFormService;
+import kr.co.hf.service.BoardUpdateService;
+import kr.co.hf.service.ComUpdateFormService;
+import kr.co.hf.service.ComUpdateService;
+import kr.co.hf.service.IBoardService;
+import kr.co.hf.service.IRecipeService;
+import kr.co.hf.service.RecipeDetailService;
 
 /**
  * Servlet implementation class BoardController
  */
-@WebServlet("/dqwdwdwd")
+
+@WebServlet("*.do")
+
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,23 +66,25 @@ public class BoardController extends HttpServlet {
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
+		IBoardService sv = null;
+		
+		IRecipeService IRsv = null;
 		
 		if(uri.equals("/HFprj/boardList.do")) {
 			
-			List<BoardVO> boardList = dao.getBoardList();
+			sv = new BoardListService();
 			
-			request.setAttribute("boardList", boardList);
-			
-			ui = "/board/boardList.jsp";
+			sv.execute(request, response);
+
+			ui = "/board/getBoardList.jsp";
 			
 			
 			
 		} else if (uri.equals("/HFprj/boardDetail.do")) {
-			String postID = request.getParameter("board_num");
 			
-			BoardVO board = dao.getBoardDetail(Integer.parseInt(postID));
+			sv = new BoardDetailService();
 			
-			request.setAttribute("board", board);
+			sv.execute(request, response);
 			
 			ui = "/board/boardDetail.jsp";
 			
@@ -79,21 +94,50 @@ public class BoardController extends HttpServlet {
 			
 		} else if (uri.equals("/HFprj/boardInsert.do")) {
 			
-			request.setCharacterEncoding("UTF-8");
+			sv = new BoardInsertService();
 			
-			String postTitle = request.getParameter("postTitle");
-			String postAuthor = request.getParameter("postAuthor");
-			String postContent = request.getParameter("postContent");
-			String postType = request.getParameter("postType");
+			sv.execute(request, response);
 			
+			ui = "/boardList.do";
 			
-			dao.boardInsert(Integer.parseInt(postAuthor), postTitle, postContent, Integer.parseInt(postType));
+		} else if (uri.equals("/HFprj/boardUpdate.do")) {
 			
-			List<BoardVO> boardList = dao.getBoardList();
+			sv = new BoardUpdateService();
 			
-			request.setAttribute("boardList", boardList);
+			sv.execute(request, response);
 			
-			ui = "/board/boardList.jsp";
+			ui = "/boardList.do";
+			
+		} else if (uri.equals("/HFprj/boardUpdateForm.do")) {
+			
+			sv = new BoardUpdateFormService();
+			
+			sv.execute(request, response);
+			
+			ui = "/board/boardUpdateForm.jsp";
+		
+		} else if (uri.equals("/HFprj/boardDelete.do")) {
+			
+			sv = new BoardDeleteService();
+			
+			sv.execute(request, response);
+			
+			ui = "/boardList.do";
+		} else if (uri.equals("/HFprj/recipeDetail.do")) {
+			
+			IRsv = new RecipeDetailService();
+			
+			IRsv.execute(request, response);
+			
+			ui = "recipe/recipeDetail.jsp";
+			
+		} else if(uri.equals("/HFprj/comUpdateForm.do")) {
+			
+			IRsv = new ComUpdateFormService();
+			
+			IRsv.execute(request, response);
+			
+			ui = "/com/comUpdateForm.jsp";
 		}
 		
 		RequestDispatcher dp = request.getRequestDispatcher(ui);

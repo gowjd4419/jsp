@@ -7,8 +7,8 @@
 이 경우만 예외적으로 스크립트릿을 리다이렉트를 사용한다. -->
 세션값 : ${sessionScope.s_id }<br>
 <c:if test="${sessionScope.s_id eq null}">
-   <script>location.href="http://localhost:8181/MyFirstWeb/"</script>  <!-- 스크립트릿이 아닌 자바스크립트 사용법 -->
-   <% //response.sendRedirect("http://localhost:8181/MyFirstWeb/"); %> <!-- 스크립트릿 사용법 -->
+   <!--<script>location.href="http://localhost:8181/MyFirstWeb/"</script> 스크립트릿이 아닌 자바스크립트 사용법 -->
+   <%// response.sendRedirect("http://localhost:8181/MyFirstWeb/"); %> <!-- 스크립트릿 사용법 이 방법 추천 -->
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -44,6 +44,8 @@
               </c:forEach>
           </tbody>
      </table>
-     <a href="http://localhost:8181/MyFirstWeb/boardInsertForm.do"><button>글쓰기</button></a>
+      <c:if test="${sessionScope.s_id != null }">
+         <a href="http://localhost:8181/MyFirstWeb/boardInsertForm.do"><button>글쓰기</button></a>
+     </c:if>
 </body>
 </html>

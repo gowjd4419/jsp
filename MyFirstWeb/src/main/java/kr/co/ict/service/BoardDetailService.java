@@ -15,6 +15,7 @@ import kr.co.ict.domain.BoardVO;
 			BoardDAO dao = BoardDAO.getInstance();
 			String strBoardNum = request.getParameter("board_num");
 			int boardNum = Integer.parseInt(strBoardNum);
+			dao.upHit(boardNum);
 			BoardVO board = dao.getBoardDetail(boardNum);
 			request.setAttribute("board", board);
 		}

@@ -17,7 +17,6 @@ public class BoardDAO {
 	
 	public static BoardDAO dao = new BoardDAO();
 	
-	
 	private BoardDAO() {
 		try {
 			Context ct = new InitialContext();
@@ -50,7 +49,7 @@ public class BoardDAO {
 		
 		try {
 			
-			BoardVO board = new BoardVO();
+			
 			con = ds.getConnection();
 			String sql = "SELECT * FROM board ORDER BY postTime DESC";
 			pstmt = con.prepareStatement(sql);
@@ -59,7 +58,7 @@ public class BoardDAO {
 			
 			
 				while(rs.next()) {
-					
+					BoardVO board = new BoardVO();
 					
 					board.setPostID(rs.getInt(1));
 					board.setPostAuthor(rs.getInt(2));
@@ -71,13 +70,13 @@ public class BoardDAO {
 					board.setPostType(rs.getInt(8));
 					
 					
-					System.out.println("µ¥ÀÌÅÍ µğ¹ö±ë : " + board);
+					System.out.println("board ê°’ ë°ì´í„° ë””ë²„ê¹… : " + board);
 					boardList.add(board);
 					
 				}
 			
 			
-			System.out.println("¸®½ºÆ®¿¡ ½×ÀÎ ÀÚ·á Ã¼Å© : " + boardList);
+			System.out.println("boardList ê°’ ë°ì´í„° ë””ë²„ê¹… : " + boardList);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -121,9 +120,9 @@ public class BoardDAO {
 				board.setViewCount(rs.getInt(7));
 				board.setPostType(rs.getInt(8));
 				
-				System.out.println("µ¥ÀÌÅÍ µğ¹ö±ë : " + board);
+				System.out.println("BoardVO ì²´í¬ : " + board);
 			} else {
-				System.out.println("ÇØ´ç °èÁ¤ÀÌ ¾ø½À´Ï´Ù.");
+				System.out.println("ì¼ì¹˜í•˜ëŠ” ë°ì´í„° (postID)ê°€ ì—†ìŒ");
 			}
 			
 			
@@ -161,10 +160,8 @@ public class BoardDAO {
 			pstmt.setString(3, postContent);
 			pstmt.setInt(4, postType);
 			
-			
-			System.out.println("µ¥ÀÌÅÍ µğ¹ö±ë : " + sql);
+		
 			pstmt.executeUpdate();
-			System.out.println("boardInsert ¾÷µ¥ÀÌÆ® ¼öÇà ¿Ï·á");
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -221,10 +218,8 @@ public class BoardDAO {
 			
 			pstmt.setString(1, postTitle);
 			pstmt.setString(2, postContent);
-			pstmt.setInt(3, postID);
-			pstmt.setInt(4, postType);
-			
-			System.out.println("µ¥ÀÌÅÍ µğ¹ö±ë : " + sql);
+			pstmt.setInt(3, postType);
+			pstmt.setInt(4, postID);
 			
 			pstmt.executeUpdate();
 			
@@ -245,6 +240,7 @@ public class BoardDAO {
 	public void updateViewCnt(int postID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		try {
 			
 			con = ds.getConnection();

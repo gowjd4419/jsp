@@ -33,7 +33,7 @@ public class ComDelete extends HttpServlet {
 		
 		ComDAO dao = ComDAO.getInstance();
 		dao.ComDelete(commentID);
-		response.sendRedirect("http://localhost:8181/MyFirstWeb/ComList");
+		response.sendRedirect("http://localhost:8181/HFprj/ComList");
 	}
 
 }
