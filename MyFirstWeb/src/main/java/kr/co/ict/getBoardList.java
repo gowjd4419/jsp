@@ -34,7 +34,7 @@ public class getBoardList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		BoardDAO dao = BoardDAO.getInstance();
-		List<BoardVO> boardList = dao.getBoardList();
+		List<BoardVO> boardList = dao.getBoardList(0);
 		System.out.println("데이터 받아오는 지 확인" + boardList);
 		
 		request.setAttribute("boardList", boardList);

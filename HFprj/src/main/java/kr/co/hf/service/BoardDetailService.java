@@ -14,11 +14,13 @@ public class BoardDetailService implements IBoardService{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String postID = request.getParameter("postID");
+		String strPostID = request.getParameter("postID");
+		
+		int postID = Integer.parseInt(strPostID);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		BoardVO board = dao.getBoardDetail(Integer.parseInt(postID));
+		BoardVO board = dao.getBoardDetail(postID);
 		
 		request.setAttribute("board", board);
 		

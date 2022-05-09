@@ -16,11 +16,13 @@ public class BoardUpdateFormService implements IBoardService{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String postID = request.getParameter("postID");
+		String strPostID = request.getParameter("postID");
+		
+		int postID = Integer.parseInt(strPostID);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		BoardVO board = dao.getBoardDetail(Integer.parseInt(postID));
+		BoardVO board = dao.getBoardDetail(postID);
 		
 		request.setAttribute("board", board);
 	}

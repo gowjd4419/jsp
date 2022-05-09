@@ -91,9 +91,7 @@ postAuthor : ${board.postAuthor}
      </table>
      
 	 <form action="/HFprj/ComInsertForm.do" method="post">
-	    <c:forEach var="com" items="${ComList}">
-	     	<input type="hidden" name="postID" value="${com.postID}">
-		</c:forEach>
+	     	<input type="hidden" name="postID" value="${board.postID}">
 			<input type="submit" value="댓글쓰기">
 	 </form>
     

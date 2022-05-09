@@ -125,6 +125,7 @@ public class BoardController extends HttpServlet {
 			sv.execute(request, response);
 			
 			ui = "/boardList.do";
+			
 		} else if (uri.equals("/HFprj/recipeDetail.do")) {
 			
 			IRsv = new RecipeDetailService();
@@ -150,8 +151,11 @@ public class BoardController extends HttpServlet {
 			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
 			
 		} else if(uri.equals("/HFprj/ComDelete.do")) {
+			
 			IRsv = new ComDeleteService();
+			
 			IRsv.execute(request, response);
+			
 			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
 			
 		} else if(uri.equals("/HFprj/ComInsertForm.do")) {

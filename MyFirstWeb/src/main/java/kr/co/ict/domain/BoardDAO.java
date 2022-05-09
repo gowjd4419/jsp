@@ -46,11 +46,13 @@ public class BoardDAO {
 			// getAllUserList.jsp를 참조해 아래 로직을 작성 완료하기
 			// Connection 생성
 			con = ds.getConnection();//context.xml 내부에 디비종류, 접속 url, mysql아이디, 비번이 기입됨.
+			// 페이지 번호에 따른 시작 인덱스 번호는 자바변수로 먼저 구한다.
+			int num = (pageNum-1)*10;
 			// 쿼리문 저장
-			String sql = "SELECT * FROM boardTbl order by board_num desc limit ((?-1)*10), 10;";
+			String sql = "SELECT * FROM boardTbl order by board_num desc limit ?, 10;";
 			// PreparedStatement에 쿼리문 입력
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, pageNum);
+			pstmt.setInt(1, num);
 			
 			rs = pstmt.executeQuery();
 			
@@ -90,7 +92,7 @@ public class BoardDAO {
 		return boardList;
 	}//getBoardList마무리
 	
-	// boardtbl에서 row 1개를 가져오거나(글번호존재시), 안가져옴(없는글번호 입력시)
+	// board_tbl에서 row 1개를 가져오거나(글번호존재시), 안가져옴(없는글번호 입력시)
 	// SELECT 구문 사용시에만 void사용안함 리턴자료형 사용
 	public BoardVO getBoardDetail(int boardNum) {
 		Connection con = null;
@@ -243,5 +245,42 @@ public class BoardDAO {
 		}
 		
 	}// 조회수 증가 로직 끝
+	public int getBoardCount() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int  boardCount = 0;
+		try {
+			con = ds.getConnection();                                   
+			String sql = "SELECT count(*) FROM boardTbl";
+			 pstmt = con.prepareStatement(sql);
+			    
 
+	           rs = pstmt.executeQuery();
+	           
+	           if(rs.next()) {
+	        	   boardCount = rs.getInt(1);
+	           }else {
+	        	   System.out.println("계정이 없습니다.");
+	           }
+			 
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+				rs.close();
+				
+			    }catch(Exception e){
+			    	e.printStackTrace();
+			    }
+		
+	          }
+		return boardCount;
+
+         }
+	
+	
 }

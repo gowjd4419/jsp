@@ -17,13 +17,16 @@ public class BoardInsertService implements IBoardService{
 		request.setCharacterEncoding("UTF-8");
 		
 		String postTitle = request.getParameter("postTitle");
-		String postAuthor = request.getParameter("postAuthor");
+		String strPostAuthor = request.getParameter("postAuthor");
 		String postContent = request.getParameter("postContent");
-		String postType = request.getParameter("postType");
+		String strPostType = request.getParameter("postType");
+		
+		int postAuthor = Integer.parseInt(strPostAuthor);
+		int postType = Integer.parseInt(strPostType);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		dao.boardInsert(Integer.parseInt(postAuthor), postTitle, postContent, Integer.parseInt(postType));
+		dao.boardInsert(postAuthor, postTitle, postContent, postType);
 		
 		
 	}

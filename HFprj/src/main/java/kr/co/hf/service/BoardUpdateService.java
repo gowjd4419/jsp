@@ -17,12 +17,15 @@ public class BoardUpdateService implements IBoardService{
 		
 		String postTitle = request.getParameter("postTitle");
 		String postContent = request.getParameter("postContent");
-		String postID = request.getParameter("postID");
-		String postType = request.getParameter("postType");
+		String strPostID = request.getParameter("postID");
+		String strPostType = request.getParameter("postType");
+		
+		int postID = Integer.parseInt(strPostID);
+		int postType = Integer.parseInt(strPostType);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		dao.boardUpdate(postTitle, postContent, Integer.parseInt(postType), Integer.parseInt(postID));
+		dao.boardUpdate(postTitle, postContent, postType, postID);
 		
 	}
 

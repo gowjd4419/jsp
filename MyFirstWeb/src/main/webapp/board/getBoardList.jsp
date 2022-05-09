@@ -44,6 +44,23 @@
               </c:forEach>
           </tbody>
      </table>
+     ${buttons }<br>
+     <!-- 이전 10개 페이지 조회버튼을 출력한다.
+     현재 조회중인 페이지가 1~10페이지가 아닐때만, 첫페이지 -1을 목표주소로 해서 prev버튼을 만들면 된다. -->
+     <c:if test="${buttons.startPage ne 1 }">
+     <a href="http://localhost:8181/MyFirstWeb/boardList.do?pageNum=${buttons.startPage - 1}">[prev]</a>
+     </c:if>
+     
+     <!-- foreach문의 begin, end속성을 이용해 숫자를 알맞게 깔아주기 -->
+     <c:forEach var="pageNum" begin="${buttons.startPage }" end="${buttons.endPage }">
+        <a href="http://localhost:8181/MyFirstWeb/boardList.do?pageNum=${pageNum}">[${pageNum}]</a>
+     </c:forEach>
+     
+     <!-- 이후 페이지 조회버튼을 출력한다.
+     현재 조회중인 페이지그룹과 전체 글의 마지막 페이지의 관계에 대해서 생각하면 된다. -->
+     <c:if test="${buttons.endPage ne totalPage }">
+         <a href="http://localhost:8181/MyFirstWeb/boardList.do?pageNum=${buttons.endPage + 1}">[next]</a>
+     </c:if>
       <c:if test="${sessionScope.s_id != null }">
          <a href="http://localhost:8181/MyFirstWeb/boardInsertForm.do"><button>글쓰기</button></a>
      </c:if>

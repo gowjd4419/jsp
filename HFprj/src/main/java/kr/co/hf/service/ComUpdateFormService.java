@@ -13,12 +13,17 @@ import kr.co.hf.domain.ComVO;
 
 public class ComUpdateFormService implements IRecipeService{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
 		String commentid = request.getParameter("commentID");
+		
 		int commentID = Integer.parseInt(commentid);
 		
 		System.out.println("commentID");
+		
 		ComDAO dao = ComDAO.getInstance();
+		
 		ComVO com = dao.getComDetail(commentID);
+		
 		request.setAttribute("com", com);
 	}
 

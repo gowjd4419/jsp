@@ -21,7 +21,7 @@ public class ComInsertService implements IRecipeService{
 		int postID = Integer.parseInt(postid); 
 	 
 		System.out.println(commentAuthor + "," + commentContent + "," + postID);
-		dao.ComInsert(commentAuthor, commentContent, postID);
+		dao.ComInsert(commentContent, commentAuthor, postID);
 	}
 
 }

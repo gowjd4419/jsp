@@ -17,11 +17,13 @@ public class BoardDeleteService implements IBoardService{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String postID = request.getParameter("postID");
+		String strPostID = request.getParameter("postID");
+		
+		int postID = Integer.parseInt(strPostID);
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		dao.boardDelete(Integer.parseInt(postID));
+		dao.boardDelete(postID);
 		
 		List<BoardVO> boardList = dao.getBoardList();
 		

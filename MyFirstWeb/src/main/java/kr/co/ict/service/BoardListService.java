@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.ict.domain.BoardButtonDTO;
 import kr.co.ict.domain.BoardDAO;
 import kr.co.ict.domain.BoardVO;
 
@@ -32,9 +33,23 @@ public class BoardListService implements IBoardService {
 		// pageNum이 안 들어왔을때 자동으로 1이 getBoardList에 들어가도록 조치해주기
 		
 		String pagenum = request.getParameter("pageNum");
-		int pageNum = Integer.parseInt(pagenum);
+		// 위의 pagenum이 null이냐 아니냐에 따라 달라져야 하는데 null인경우 1로 처리하도록
+		// null이 아닌 경우는 그냥 바로 해당 페이지를 보여주도록 처리하기
+		
+		int pageNum = 1;
+		
+		if(pagenum != null){
+			pageNum = Integer.parseInt(pagenum);
+	    }
+		
 		
 		BoardDAO dao = BoardDAO.getInstance();
+		int boardCount = dao.getBoardCount(); // 글 갯수를 얻어오기.
+		BoardButtonDTO buttons = new BoardButtonDTO(boardCount, pageNum);// 밑에 깔아줘야 하는 버튼에 대한 정보 추가
+		
+		// 바인딩해서 넘긴 다음, 결과페이지에서 수치정보 확인
+		request.setAttribute("buttons", buttons);
+		
 		List<BoardVO> boardList = dao.getBoardList(pageNum);
 		request.setAttribute("boardList", boardList);
 		
