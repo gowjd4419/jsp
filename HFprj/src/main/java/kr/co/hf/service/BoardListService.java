@@ -17,7 +17,15 @@ public class BoardListService implements IBoardService{
 		
 		BoardDAO dao = BoardDAO.getInstance();
 		
-		List<BoardVO> boardList = dao.getBoardList();
+		String strpageNum = request.getParameter("pageNum");
+		
+		int pageNum = 1;
+		
+		if(strpageNum != null) {
+			 pageNum = Integer.parseInt(strpageNum);
+		}
+		
+		List<BoardVO> boardList = dao.getBoardList(pageNum);
 		
 		request.setAttribute("boardList", boardList);
 		

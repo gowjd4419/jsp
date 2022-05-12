@@ -39,11 +39,10 @@ public class BoardDAO {
 	
 	
 	
-	public List<BoardVO> getBoardList(){
+	public List<BoardVO> getBoardList(int pageNum){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		
 		List<BoardVO> boardList = new ArrayList<>();
 		
@@ -51,9 +50,11 @@ public class BoardDAO {
 			
 			
 			con = ds.getConnection();
-			String sql = "SELECT * FROM board ORDER BY postTime DESC";
+			String sql = "SELECT * FROM board ORDER BY postTime DESC limit ?, 10;";
 			pstmt = con.prepareStatement(sql);
-
+			pstmt.setInt(1, pageNum);
+			
+			
 			rs = pstmt.executeQuery();
 			
 			
@@ -68,6 +69,7 @@ public class BoardDAO {
 					board.setPostLastModified(rs.getDate(6));
 					board.setViewCount(rs.getInt(7));
 					board.setPostType(rs.getInt(8));
+					board.setImageLink(rs.getString(9));
 					
 					
 					System.out.println("board 값 데이터 디버깅 : " + board);
@@ -119,6 +121,7 @@ public class BoardDAO {
 				board.setPostLastModified(rs.getDate(6));
 				board.setViewCount(rs.getInt(7));
 				board.setPostType(rs.getInt(8));
+				board.setImageLink(rs.getString(9));
 				
 				System.out.println("BoardVO 체크 : " + board);
 			} else {

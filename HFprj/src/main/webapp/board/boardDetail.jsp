@@ -14,7 +14,7 @@
 <br/>
 postID : ${board.postID}
 <br/>
-타입 : ${board.postType}
+타입 : ${board.postType }
 <br/>
 내용 : ${board.postContent}
 <br/>

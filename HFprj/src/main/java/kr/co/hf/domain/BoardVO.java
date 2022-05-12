@@ -12,6 +12,10 @@ public class BoardVO {
     private String postContent;
     private int viewCount;
     private int postType;
+    private String imageLink;
+
+
+    
 	public int getPostID() {
 		return postID;
 	}
@@ -60,10 +64,19 @@ public class BoardVO {
 	public void setPostType(int postType) {
 		this.postType = postType;
 	}
+	public String getImageLink() {
+		return imageLink;
+	}
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [postID=" + postID + ", postAuthor=" + postAuthor + ", postTitle=" + postTitle
 				+ ", postLastModified=" + postLastModified + ", postTime=" + postTime + ", postContent=" + postContent
-				+ ", viewCount=" + viewCount + ", postType=" + postType + "]";
+				+ ", viewCount=" + viewCount + ", postType=" + postType + ", imageLink=" + imageLink + "]";
 	}
+
+	
+	
 }

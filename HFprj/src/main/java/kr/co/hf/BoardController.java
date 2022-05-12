@@ -63,6 +63,8 @@ public class BoardController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String uri = request.getRequestURI();
+		uri = uri.substring(uri.lastIndexOf("/")+1);
+		uri = uri.substring(0, uri.indexOf("."));
 	
 		String ui = null;
 		
@@ -72,7 +74,7 @@ public class BoardController extends HttpServlet {
 		
 		IRecipeService IRsv = null;
 		
-		if(uri.equals("/HFprj/boardList.do")) {
+		if(uri.equals("boardList")) {
 			
 			sv = new BoardListService();
 			
@@ -82,7 +84,7 @@ public class BoardController extends HttpServlet {
 			
 			
 			
-		} else if (uri.equals("/HFprj/boardDetail.do")) {
+		} else if (uri.equals("boardDetail")) {
 			
 			sv = new BoardDetailService();
 			
@@ -90,11 +92,11 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/board/boardDetail.jsp";
 			
-		} else if (uri.equals("/HFprj/boardInsertForm.do")) {
+		} else if (uri.equals("boardInsertForm")) {
 			
 			ui = "/board/boardInsertForm.jsp";
 			
-		} else if (uri.equals("/HFprj/boardInsert.do")) {
+		} else if (uri.equals("boardInsert")) {
 			
 			sv = new BoardInsertService();
 			
@@ -102,7 +104,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/boardList.do";
 			
-		} else if (uri.equals("/HFprj/boardUpdate.do")) {
+		} else if (uri.equals("boardUpdate")) {
 			
 			sv = new BoardUpdateService();
 			
@@ -110,7 +112,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/boardList.do";
 			
-		} else if (uri.equals("/HFprj/boardUpdateForm.do")) {
+		} else if (uri.equals("boardUpdateForm")) {
 			
 			sv = new BoardUpdateFormService();
 			
@@ -118,7 +120,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/board/boardUpdateForm.jsp";
 		
-		} else if (uri.equals("/HFprj/boardDelete.do")) {
+		} else if (uri.equals("boardDelete")) {
 			
 			sv = new BoardDeleteService();
 			
@@ -126,7 +128,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/boardList.do";
 			
-		} else if (uri.equals("/HFprj/recipeDetail.do")) {
+		} else if (uri.equals("recipeDetail")) {
 			
 			IRsv = new RecipeDetailService();
 			
@@ -134,7 +136,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "recipe/recipeDetail.jsp";
 			
-		} else if(uri.equals("/HFprj/ComUpdateForm.do")) {
+		} else if(uri.equals("ComUpdateForm")) {
 			
 			IRsv = new ComUpdateFormService();
 			
@@ -142,7 +144,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/Com/ComUpdateForm.jsp";
 		
-		} else if(uri.equals("/HFprj/ComUpdate.do")) {
+		} else if(uri.equals("ComUpdate")) {
 			
 			IRsv = new ComUpdateService();
 			
@@ -150,7 +152,7 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
 			
-		} else if(uri.equals("/HFprj/ComDelete.do")) {
+		} else if(uri.equals("ComDelete")) {
 			
 			IRsv = new ComDeleteService();
 			
@@ -158,17 +160,25 @@ public class BoardController extends HttpServlet {
 			
 			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
 			
-		} else if(uri.equals("/HFprj/ComInsertForm.do")) {
+		} else if(uri.equals("ComInsertForm")) {
 			
 			ui = "/Com/ComInsertForm.jsp";
 		
-		} else if(uri.equals("/HFprj/ComInsert.do")) {
+		} else if(uri.equals("ComInsert")) {
 			
 			IRsv = new ComInsertService();
 			
 			IRsv.execute(request, response);
 			
 			ui = "/recipeDetail.do?postID=" + request.getParameter("postID");
+			
+		} else if(uri.equals("tamplateSample")){
+			
+			sv = new BoardListService();
+			
+			sv.execute(request, response);
+
+			ui = "/tamplateSample.jsp";
 			
 		}
 		

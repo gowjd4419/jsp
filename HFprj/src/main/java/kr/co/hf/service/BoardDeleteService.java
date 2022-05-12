@@ -24,10 +24,7 @@ public class BoardDeleteService implements IBoardService{
 		BoardDAO dao = BoardDAO.getInstance();
 		
 		dao.boardDelete(postID);
-		
-		List<BoardVO> boardList = dao.getBoardList();
-		
-		request.setAttribute("boardList", boardList);
+
 		
 	}
 
